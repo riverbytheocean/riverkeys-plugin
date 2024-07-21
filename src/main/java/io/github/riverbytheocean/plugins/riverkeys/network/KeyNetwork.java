@@ -6,7 +6,6 @@ import io.github.riverbytheocean.plugins.riverkeys.api.KeyReleaseEvent;
 import io.github.riverbytheocean.plugins.riverkeys.config.KeyInfo;
 import io.github.riverbytheocean.plugins.riverkeys.network.packets.AddKeyPacket;
 import io.github.riverbytheocean.plugins.riverkeys.network.packets.LoadKeysPacket;
-import io.netty.buffer.ByteBuf;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
@@ -35,7 +34,6 @@ public class KeyNetwork {
     }
 
     public static void receiveGreeting(Player player) {
-        RiverKeys.getPlugin().getLogger().info("greeting recieved!");
 		/* Send this server's specified keybindings to the
 		 client. This is delayed to make sure the client is properly
 		 connected before attempting to send any data over. */
@@ -45,7 +43,6 @@ public class KeyNetwork {
 
 			/* Send the "load" packet after sending every keybinding packet, to tell
 			 the client to load all the user-specific keybinds saved on their machine. */
-            RiverKeys.getPlugin().getLogger().info("sending key load packet!");
 
             PacketManager.sendToClient(player, new LoadKeysPacket());
 
@@ -64,29 +61,29 @@ public class KeyNetwork {
 	 These are neccessary for reading the String data that's being sent from the client.
 	 version 2.1: New methods added for reading int arrays */
 
-    private static int readVarInt(ByteBuf buf) {
-        byte b0;
-        int i = 0;
-        int j = 0;
-        //noinspection InfiniteLoopStatement
-        do {
-            b0 = buf.readByte();
-            i |= (b0 & 0x7F) << j++ * 7;
-            if (j <= 5) continue;
-            throw new RuntimeException("VarInt too big");
-        } while ((b0 & 0x80) == 128);
-        return i;
-    }
+//    private static int readVarInt(ByteBuf buf) {
+//        byte b0;
+//        int i = 0;
+//        int j = 0;
+//        //noinspection InfiniteLoopStatement
+//        do {
+//            b0 = buf.readByte();
+//            i |= (b0 & 0x7F) << j++ * 7;
+//            if (j <= 5) continue;
+//            throw new RuntimeException("VarInt too big");
+//        } while ((b0 & 0x80) == 128);
+//        return i;
+//    }
 
 
-    private static void writeVarInt(ByteBuf buf, int value) {
-        while ((value & -128) != 0) {
-            buf.writeByte(value & 127 | 128);
-            value >>>= 7;
-        }
-
-        buf.writeByte(value);
-    }
+//    private static void writeVarInt(ByteBuf buf, int value) {
+//        while ((value & -128) != 0) {
+//            buf.writeByte(value & 127 | 128);
+//            value >>>= 7;
+//        }
+//
+//        buf.writeByte(value);
+//    }
 
 	/* I may never need to read an int array on this side, but I'm keeping it just in case...
 
@@ -108,11 +105,11 @@ public class KeyNetwork {
 		}
 	}*/
 
-    public static void writeIntArray(ByteBuf buf, int[] array) {
-        writeVarInt(buf, array.length);
-
-        for (int i : array)
-            writeVarInt(buf, i);
-    }
+//    public static void writeIntArray(ByteBuf buf, int[] array) {
+//        writeVarInt(buf, array.length);
+//
+//        for (int i : array)
+//            writeVarInt(buf, i);
+//    }
 
 }

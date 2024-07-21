@@ -1,7 +1,5 @@
 package io.github.riverbytheocean.plugins.riverkeys.network;
 
-import net.minecraft.resources.ResourceLocation;
-
 public class KeyChannels {
 
     public static final String HANDSHAKE = "arikeys:greeting";
