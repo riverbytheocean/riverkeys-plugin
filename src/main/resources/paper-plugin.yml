@@ -1,0 +1,8 @@
+name: riverkeys
+version: '${version}'
+authors:
+  - ASangarin
+  - riverbytheocean
+main: io.github.riverbytheocean.plugins.riverkeys.RiverKeys
+api-version: '1.21'
+description: heyyy! haiii :3
